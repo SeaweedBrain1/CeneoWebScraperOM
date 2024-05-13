@@ -16,19 +16,19 @@
         <div class="p-3 sticky-top border border-dark rounded bg-secondary">
             <ul class="nav flex-column nav-tabs nav-fill">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/">Strona główna</a>
+                    <a class="nav-link text-light" href="{{url_for('index')}}">Strona główna</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/extract">Strona ekstrakcji opinii</a>
+                    <a class="nav-link text-light" href="{{url_for('extract')}}">Strona ekstrakcji opinii</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/author">Strona o autorze</a>
+                    <a class="nav-link text-light" href="{{url_for('author')}}">Strona o autorze</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/product/1">Strona z opiniami o produkcie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/products">Strona listy produktów</a>
+                    <a class="nav-link text-light" href="{{url_for('products')}}">Strona listy produktów</a>
                 </li>
             </ul>
         </div>
