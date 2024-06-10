@@ -1,7 +1,15 @@
 h1{
-    color: chocolate !important;
+    color: rgb(11, 30, 139) !important; 
+}
+
+.h4{
+    color:rgb(11, 30, 139)
 }
 
 .sticky-top{
     margin-top:50px !important;
   }
+
+#products_bg{
+    background-color: rgb(212, 226, 255);
+}

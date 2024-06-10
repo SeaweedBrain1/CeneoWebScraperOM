@@ -1,5 +1,18 @@
 {% extends "base.html.jinja" %}
 {% block title %}Lista produktów{% endblock %}
 {% block content %}
-    {{products}}
+{% for product in products%}
+<div class="border border-dark border-3 rounded-5 m-5 p-4" id = "products_bg">
+  <p class="h4 text-dark"><a class="nav-link" href="{{ url_for('product', product_id = product['product_id']) }}">{{product['product_name']}} ({{product['product_id  ']}})</a></p>
+  <ul>
+    <li><strong>Liczba opinii:</strong> {{product["opinions_count"]}}</li>
+    <li><strong>Liczba zalet:</strong> {{product["pros_count"]}}</li>
+    <li><strong>Liczba wad:</strong> {{product["cons_count"]}}</li>
+    <li><strong>Średnia ocena:</strong> {{"%.2f"|format(product["average_rating"])}}</li>
+  </ul>
+  <button class="btn btn-dark btn-sm mx-4" type="button" onclick="window.location.href='{{ url_for('download_json', product_id=product['product_id']) }}';">json</button>
+  <button class="btn btn-dark btn-sm mx-4" type="button" onclick="window.location.href='{{ url_for('download_csv', product_id=product['product_id']) }}';">csv</button>
+  <button class="btn btn-dark btn-sm mx-4" type="button" onclick="window.location.href='{{ url_for('download_xlsx', product_id=product['product_id']) }}';">xlsx</button>
+</div>
+{% endfor %}
 {% endblock %}

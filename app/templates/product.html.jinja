@@ -1,4 +1,61 @@
 {% extends "base.html.jinja" %}
 {% block content %}
-<p>To jest strona z opiniami o produkcie {{product_id}}.</p>
+    <div class="container border border-3 border-dark rounded-5 mb-5 " id = "products_bg">
+        <h3 class="text-center text-dark mb-3 mt-3">Przyciski do pobieraniu plików z opiniami</h2>
+        <div class="d-flex justify-content-center mb-3">
+            <button class="btn btn-dark btn-lg mx-4" type="button" onclick="window.location.href='{{ url_for('download_json', product_id=product_id) }}';">json</button>
+            <button class="btn btn-dark btn-lg mx-4" type="button" onclick="window.location.href='{{ url_for('download_csv', product_id=product_id) }}';">csv</button>
+            <button class="btn btn-dark btn-lg mx-4" type="button" onclick="window.location.href='{{ url_for('download_xlsx', product_id=product_id) }}';">xlsx</button>
+        </div>
+    </div>
+    <button class="btn btn-dark btn-lg mb-4" type="button" onclick="window.location.href='{{ url_for('download_xlsx', product_id=product_id) }}';">Wykresy</button>
+    <div class="mb-5" style="overflow-x: auto;">    
+        <table id="opinions_table" class="table table-fixed text-center border border-4">
+            <thead class="border border-3">
+                <tr>
+                    <th class="border border-3">ID opinii</th>
+                    <th class="border border-3">Autor</th>
+                    <th class="border border-3">Rekomendacja</th>
+                    <th class="border border-3">Ocena</th>
+                    <th class="border border-3">Zawartość</th>
+                    <th class="border border-3">Zalety</th>
+                    <th class="border border-3">Wady</th>
+                    <th class="border border-3">Użyteczne</th>
+                    <th class="border border-3">Nieużyteczne</th>
+                    <th class="border border-3">Data opublikowania</th>
+                    <th class="border border-3">Data zakupu</th>
+                </tr>
+                <tr>
+                    <th class="border border-3">Opinion ID</th>
+                    <th class="border border-3">Author</th>
+                    <th class="border border-3">Recommendation</th>
+                    <th class="border border-3">Rating</th>
+                    <th class="border border-3">Content</th>
+                    <th class="border border-3">Pros</th>
+                    <th class="border border-3">Cons</th>
+                    <th class="border border-3">Useful</th>
+                    <th class="border border-3">Useless</th>
+                    <th class="border border-3">Post Date</th>
+                    <th class="border border-3">Purchase Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for opinion in product_opinions %}
+                <tr>
+                    <td class="border border-3">{{ opinion.opinion_id }}</td>
+                    <td class="border border-3">{{ opinion.author }}</td>
+                    <td class="border border-3">{{ opinion.recommendation }}</td>
+                    <td class="border border-3">{{ opinion.rating }}</td>
+                    <td class="border border-3">{{ opinion.content }}</td>
+                    <td class="border border-3">{{ opinion.pros | join(', ') }}</td>
+                    <td class="border border-3">{{ opinion.cons | join(', ') }}</td>
+                    <td class="border border-3">{{ opinion.useful }}</td>
+                    <td class="border border-3">{{ opinion.useless }}</td>
+                    <td class="border border-3">{{ opinion.post_date }}</td>
+                    <td class="border border-3">{{ opinion.purchase_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

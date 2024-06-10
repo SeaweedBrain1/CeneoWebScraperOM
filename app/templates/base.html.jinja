@@ -7,14 +7,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+    $('#opinions_table thead tr:eq(1) th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Wyszukaj" class="column_search" style="max-width: 75px;" />' );
+    } );
+
+    var table = $('#opinions_table').DataTable({
+      orderCellsTop: true
+    });
+ 
+    $( '#opinions_table thead'  ).on( 'keyup', ".column_search",function () {
+
+        table
+            .column( $(this).parent().index() )
+            .search( this.value )
+            .draw();
+    } );
+
+    } );
+    </script>
     <title>Ceneo.pl Web Scraper</title>
 </head>
 <body>
     <header class="text-center">
         <h1>Ceneo.pl Web Scraper</h1>
     </header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark container-fluid">
+        <div class="container">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -33,9 +56,9 @@
             </div>
         </div>
     </nav>
-    <section class="container">
+    <section class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col">  
             <h2 class="text-center mt-3 mb-3">
                 {% block title %}
                 {% endblock %}
@@ -46,7 +69,7 @@
             </div>
         </div>  
     </section>
-    <footer class="container bg-dark text-light fixed-bottom text-center">
+    <footer class="container-fluid bg-dark text-light fixed-bottom text-center">
         <p>Oskar Marzec, Uniwersytet Ekonomiczny w Krakowie</p>
     </footer>
 </body>
